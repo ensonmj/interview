@@ -95,8 +95,9 @@ ListNode *removeIf(ListNode *head, std::function<bool(int)> &&functor) {
     return head;
 }
 
+// same as std::function&& version, but has higher priority
 template<typename Functor>
-ListNode *remove_if(ListNode *head, Functor &&functor) {
+ListNode *removeIf(ListNode *head, Functor &&functor) {
     cout << "use template" << endl;
     ListNode **p = &head;
     while(*p) {
@@ -105,7 +106,6 @@ ListNode *remove_if(ListNode *head, Functor &&functor) {
             ListNode *tmp = *p;
             *p = (*p)->next;
             delete tmp;
-            break;
         } else {
             p = &((*p)->next);
         }
@@ -227,7 +227,7 @@ ListNode *findCircleEntry(ListNode *head) {
 
 
 int main(int argc, char const* argv[]) {
-    const char *str = "3, 1, 5, 4, 8, 10";
+    const char *str = "3, 1, 5, 4, 8, 4, 4, 8, 10";
     ListNode *head = mkList(str);
     print(head);
 
@@ -242,8 +242,9 @@ int main(int argc, char const* argv[]) {
     cout << "after remove node 4: ";
     print(head);
 
+    // use std::function&
     std::function<bool(int)> functor = [](int val){return val == 1;};
-    head = removeIf(head, functor); // use std::function
+    head = removeIf(head, functor);
     cout << "after remove node 1: ";
     print(head);
 
