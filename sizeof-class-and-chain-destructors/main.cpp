@@ -4,7 +4,7 @@
 using namespace std;
 
 //g++ -fdump-class-hierarchy 可以dump内存结构
-//x86-64 int 4字节，指针8字节
+//x86-64 int 4字节，long 8字节，指针8字节
 //类对齐到最大成员（此处是指针)大小，即8字节对齐
 //
 //虚函数表中最后两项都是析构函数，虚继承的情况下可能会有三个
@@ -38,7 +38,7 @@ class B : public A {
 };
 
 int main() {
-    cout << "sizeof(int): " << sizeof(int) << " sizeof(long): " << sizeof(long) << endl;
+    cout << "sizeof(int): " << sizeof(int) << " sizeof(long): " << sizeof(long) << " sizeof(void *): " << sizeof(void *) << endl;
     cout << "INT_MAX: " << INT_MAX << "INT_MIN: " << INT_MIN << endl;
 
     cout << "sizeof(A): " << sizeof(A) << " sizeof(B): " << sizeof(B) << endl;
